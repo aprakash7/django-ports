@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import commands
+from .models import Outputs
 
-# Register your models here.
-admin.site.register(commands)
+admin.site.register(Outputs)

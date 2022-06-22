@@ -1,9 +1,9 @@
 from django.shortcuts import render
 import requests
 from django.http import HttpResponse
-from .models import commands
 import subprocess
 from time import sleep
+from .models import Outputs
 
 # Create your views here.
 
@@ -22,17 +22,11 @@ def index(request):
         output += p.stdout
         sleep(int(gap))
 
+    out1 = Outputs()
+    out1.op = output
+    out1.save()
+
     # print(output)
 
     context = {"output": output}
     return render(request, "main.html", context)
-
-
-"""
-    for item in data:
-        c, _ = commands.objects.get_or_create()
-        c.cmd = item['cmd']
-        c.repetition = item['repetition']
-        c.gap = item['gap']
-        c.save()
-"""
