@@ -13,7 +13,7 @@ from rest_framework.views import Response
 
 # Create your views here.
 
-
+'''
 def index(request):
     url = "http://127.0.0.1:8000/commands/"
     data = requests.get(url).json()
@@ -36,6 +36,7 @@ def index(request):
 
     context = {"output": output}
     return render(request, "main.html", context)
+'''
 
 
 class outputList(APIView):

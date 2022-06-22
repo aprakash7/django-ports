@@ -29,7 +29,7 @@ class commandsList(APIView):
 
 # input form
 def comm_view(request):
-    url = "http://127.0.0.1:8001/api/"
+    url = "http://127.0.0.1:8001/"
     data = requests.get(url).json()
     op = data[-1]['op']
 
