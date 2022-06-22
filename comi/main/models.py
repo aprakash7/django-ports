@@ -5,7 +5,7 @@ from django.db import models
 
 class commands(models.Model):
     cmd = models.CharField(max_length=30)
-    repetition = models.IntegerField()
+    repetition = models.IntegerField(null=True)
     gap = models.IntegerField()
 
     def __str__(self):
