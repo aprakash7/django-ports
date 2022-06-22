@@ -8,6 +8,7 @@ from rest_framework.views import Response
 from .models import commands
 from .serializers import commandsSerializer
 from .forms import ProductForm
+import requests
 # Create your views here
 
 
@@ -28,10 +29,14 @@ class commandsList(APIView):
 
 # input form
 def comm_view(request):
+    url = "http://127.0.0.1:8001/api/"
+    data = requests.get(url).json()
+    op = data[-1]['op']
+
     form = ProductForm(request.POST or None)
     if form.is_valid():
         form.save()
         form = ProductForm()
 
-    context = {'form': form}
+    context = {'form': form, 'op': op}
     return render(request, 'my_form.html', context)

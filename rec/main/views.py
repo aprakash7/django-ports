@@ -1,9 +1,15 @@
 from django.shortcuts import render
 import requests
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 import subprocess
 from time import sleep
+from requests.models import Response
 from .models import Outputs
+from .serializers import outputSerializer
+from rest_framework.views import APIView
+from rest_framework import serializers, status
+from rest_framework.views import Response
 
 # Create your views here.
 
@@ -30,3 +36,13 @@ def index(request):
 
     context = {"output": output}
     return render(request, "main.html", context)
+
+
+class outputList(APIView):
+    def get(self, request):
+        all_outputs = Outputs.objects.all()
+        serializer = outputSerializer(all_outputs, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        pass

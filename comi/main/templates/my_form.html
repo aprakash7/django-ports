@@ -7,9 +7,13 @@
 		<link href="css/style.css" rel="stylesheet">
 	</head>
 	<body>
+	<h3> Submit command: </h3>
 	<form method="POST"> {% csrf_token %}
 	    {{ form.as_p }}
 		<input type="submit" value="Save">
 	</form>
+	<br>
+	<h3>Latest output:</h3>
+	{{op}}
 	</body>
 </html>
