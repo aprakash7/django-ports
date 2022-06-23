@@ -1,3 +1,4 @@
+from os import stat
 from django.shortcuts import render
 import requests
 from django.http import HttpResponse
@@ -39,11 +40,19 @@ def index(request):
 '''
 
 
+# API view
 class outputList(APIView):
+
+    # GET request
     def get(self, request):
         all_outputs = Outputs.objects.all()
         serializer = outputSerializer(all_outputs, many=True)
         return Response(serializer.data)
 
+    # POST request
     def post(self, request):
-        pass
+        serializer = outputSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
